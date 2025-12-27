@@ -25,8 +25,8 @@ class Person:
     def __init__(
             self,
             name: str,
-            hp_quantity: int,
-            base_attack: int,
+            hp_quantity: float,
+            base_attack: float,
             base_protection_percent: float
         ):
         self.name = name
@@ -41,20 +41,23 @@ class Person:
         self.things.extend(selected)
 
     def attack_damage(self):
+        total_attack = self.base_attack
         for thing in self.things:
-            self.base_attack += thing.attack
-        return self.base_attack
+            total_attack += thing.attack
+        return total_attack
 
     def finalProtection(self):
+        total_protection = self.base_protection_percent
         for thing in self.things:
-            self.base_protection_percent += thing.protection_percent
-        return self.base_protection_percent
+            total_protection += thing.protection_percent
+        return total_protection
 
     def HitPoints(self):
+        total_hp = self.hp_quantity
         for thing in self.things:
-            self.hp_quantity += thing.life
-        return self.hp_quantity
-
+            total_hp += thing.life
+        return total_hp
+    
 
 class Paladin(Person):
     def __init__(
