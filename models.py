@@ -53,11 +53,19 @@ class Person:
         return total_protection
 
     def HitPoints(self):
-        total_hp = self.hp_quantity
         for thing in self.things:
-            total_hp += thing.life
-        return total_hp
-    
+            self.hp_quantity += thing.life
+        return self.hp_quantity
+
+    def attack(self, target):
+        damage = self.attack_damage()*(1 - target.finalProtection())
+        target.take_damage(damage)
+        return damage
+
+    def take_damage(self, damage):
+        self.hp_quantity -= damage
+        return damage
+
 
 class Paladin(Person):
     def __init__(
